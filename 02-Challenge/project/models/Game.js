@@ -21,7 +21,6 @@ Game.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // ... you can add other fields like image, description, etc.
   },
   {
     sequelize,
