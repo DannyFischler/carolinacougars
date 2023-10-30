@@ -24,7 +24,7 @@ Comment.init(
         key: 'id',
       },
     },
-    // ... you can add other fields like user_id if you want to associate comments with users.
+ 
   },
   {
     sequelize,
