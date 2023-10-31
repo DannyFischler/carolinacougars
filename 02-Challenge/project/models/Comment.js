@@ -1,7 +1,5 @@
-// models/Comment.js
-
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection'); // Adjust the path as necessary
 
 class Comment extends Model {}
 
@@ -17,17 +15,14 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    game_id: {
+    rawg_game_id: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'game',
-        key: 'id',
-      },
+      allowNull: false,
     },
- 
   },
   {
     sequelize,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',
