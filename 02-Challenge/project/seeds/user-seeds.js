@@ -25,3 +25,5 @@ const {User} = require('../models')
 
 //creating bulk data from the array
 const seedUser = () => User.bulkCreate(userData);
+
+module.exports = seedUser
