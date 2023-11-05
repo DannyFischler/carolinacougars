@@ -17,7 +17,7 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       // redirect browser to profile page to notify that signin was a success
-      alert(`Sign in successful. Welcome!`);
+      alert(`Sign in successful. HELLO!!!!`);
       document.location.replace('/');
     } 
     else {
