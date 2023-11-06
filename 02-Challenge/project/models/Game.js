@@ -1,4 +1,3 @@
-
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -12,14 +11,11 @@ Game.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    rawg_game_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // other attributes...
   },
   {
     sequelize,
