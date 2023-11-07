@@ -59,7 +59,7 @@ User.init(
             },
         },
         
-        //other options
+    
         sequelize,
         timestamps: false,
         freezeTableName: true,

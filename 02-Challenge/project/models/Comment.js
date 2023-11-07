@@ -3,33 +3,41 @@ const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 
-Comment.init(
-  {
-    // ID column
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    // Text content of the comment
-    text: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    // Game slug from RAWG API to link comments to specific game
-    game_slug: {
-      type: DataTypes.STRING,
-      allowNull: false,
+Comment.init({
+  // Existing fields
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  game_slug: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  text: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  // New field for associating the comment with a user
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'users', 
+      key: 'id',
     },
   },
-  {
-    sequelize,
-    timestamps: true, // to have Sequelize handle created_at and updated_at fields
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'comment', // this defines the name of the table in the database
-  }
-);
+}, {
+  sequelize,
+  timestamps: true,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'comment',
+});
 
 module.exports = Comment;
