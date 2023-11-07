@@ -17,6 +17,20 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+          model: 'User',
+          key: 'id'
+      }
+  },
+    
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: DataTypes.NOW,
+  },
     // Game slug from RAWG API to link comments to specific game
     game_slug: {
       type: DataTypes.STRING,
