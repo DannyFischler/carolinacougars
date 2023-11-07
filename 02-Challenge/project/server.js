@@ -1,18 +1,18 @@
 //importing dependencies
 
 const path = require('path');
+require('dotenv').config();
+
 const express = require('express');
-const session = require('express-session');
-const exphbs = require('express-handlebars');
-const routes = require('./controllers'); // make sure this path is correct
-const sequelize = require('./config/connection'); // make sure this path is correct
-const helpers = require('./utils/helpers');
+const sequelize = require('./config/connection'); 
+
 // Importing routes
 const gameRoutes = require('./controllers/api/gameRoutes'); 
 const commentRoutes = require('./controllers/api/commentRoutes');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
+app.use(express.static('public'));
 const PORT = process.env.PORT || 3001;
 
     //creating a session object
