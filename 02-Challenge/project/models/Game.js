@@ -15,6 +15,10 @@ Game.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     // other attributes...
   },
   {

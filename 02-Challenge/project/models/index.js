@@ -1,11 +1,14 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/connection');
 
+const User = require('./User');  // Import the User model
 const Game = require('./Game');
 const Comment = require('./Comment');
 
-Comment.belongsTo(Game, {
-  foreignKey: 'game_id',
+
+// Define User and Comment associations
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
   onDelete: 'CASCADE',
 });
 
@@ -14,8 +17,15 @@ Game.hasMany(Comment, {
   onDelete: 'CASCADE',
 });
 
-sequelize.sync({ force: false }).then(() => {
-  console.log('Database & tables created!');
+
+// Existing Game and Comment associations
+Comment.belongsTo(Game, {
+  foreignKey: 'game_id',
 });
 
-module.exports = { Game, Comment };
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+
+module.exports = { User, Game, Comment };  // Export the User model

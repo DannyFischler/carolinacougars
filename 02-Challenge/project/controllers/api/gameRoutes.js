@@ -1,6 +1,6 @@
 const axios = require('axios');
 const router = require('express').Router();
-const { Game, Comment } = require('../../models');
+const { Game, Comment, User } = require('../../models'); // Include the User model
 
 // Route to get game details by game name
 router.get('/search/:gameName', async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/search/:gameName', async (req, res) => {
   try {
     const rawgResponse = await axios.get(`https://api.rawg.io/api/games`, {
       params: {
-        key: process.env.RAWG_API_KEY, 
+        key: process.env.RAWG_KEY,
         search: gameName,
       },
     });
@@ -17,22 +17,25 @@ router.get('/search/:gameName', async (req, res) => {
     if (!rawgResponse.data.results.length) {
       return res.status(404).json({ message: 'Game not found' });
     }
-
+    
     const gameDetails = rawgResponse.data.results[0];
 
-    // Extract attributes
     const attributes = {
       releaseDate: gameDetails.released,
-      developers: gameDetails.developers.map(dev => dev.name),
-      platforms: gameDetails.platforms.map(p => p.platform.name),
-      genres: gameDetails.genres.map(genre => genre.name),
+      developers: gameDetails.developers?.map(dev => dev.name) || [],
+      platforms: gameDetails.platforms?.map(p => p.platform.name) || [],
+      genres: gameDetails.genres?.map(genre => genre.name) || [],
       // Include additional attributes you're interested in
     };
+    
 
-    // Fetch comments for the game
+    // Fetch comments for the game including user details
     const comments = await Comment.findAll({
       where: { game_id: gameDetails.id },
-      include: [Game],
+      include: [
+        { model: Game },
+        { model: User, attributes: ['user_name'] } // Assuming 'user_name' is the field you want from the User model
+      ],
     });
 
     res.json({ gameDetails, attributes, comments });
@@ -42,14 +45,18 @@ router.get('/search/:gameName', async (req, res) => {
   }
 });
 
+// Route to get comments for a specific game by ID and attribute/category
 router.get('/comments/:gameId/:attribute', async (req, res) => {
   try {
     const comments = await Comment.findAll({
       where: {
         game_id: req.params.gameId,
-        category: req.params.attribute, 
+        category: req.params.attribute,
       },
-      include: [Game],
+      include: [
+        { model: Game },
+        { model: User, attributes: ['user_name'] } // Include User details here as well
+      ],
     });
 
     res.json(comments);
@@ -58,6 +65,5 @@ router.get('/comments/:gameId/:attribute', async (req, res) => {
     res.status(500).json({ message: 'Error fetching comments', error });
   }
 });
-
 
 module.exports = router;

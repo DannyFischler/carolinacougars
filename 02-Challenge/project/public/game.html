@@ -7,19 +7,30 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <div id="search-container">
+        <form id="search-form">
+            <input type="search" id="search-input" placeholder="Search for a game..." />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
     <div id="game-info"></div>
+    
+    <ul id="game-attributes-list">
+        <li id="overview" onclick="selectAttribute('overview')">Overview</li>
+        <!-- Additional attributes will be populated here by the script.js -->
+    </ul>
+    
+    <div id="comments-section">
+        <div id="comments"></div>
+        <form id="comment-form">
+            <input type="hidden" id="gameSlug" name="gameSlug">
+            <input type="hidden" id="attribute" name="attribute" value="overview">
+            <textarea id="commentText" name="commentText" placeholder="Leave a comment"></textarea>
+            <button type="submit">Submit Comment</button>
+        </form>
+    </div>
 
-    <ul id="game-attributes"></ul>
-
-    <div id="comments"></div>
-
-    <form id="comment-form">
-      <input type="hidden" id="gameSlug" name="gameSlug">
-      <input type="hidden" id="attribute" name="attribute">
-      <textarea id="commentText" name="commentText" placeholder="Leave a comment"></textarea>
-      <button type="submit">Submit Comment</button>
-    </form>
-
-    <script src="./script.js"></script> 
+    <script src="./js/script.js"></script> 
 </body>
 </html>

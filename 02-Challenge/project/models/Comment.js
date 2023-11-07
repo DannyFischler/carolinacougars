@@ -11,10 +11,6 @@ Comment.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  game_slug: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   category: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -23,12 +19,20 @@ Comment.init({
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  // New field for associating the comment with a user
-  userId: {
+  game_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users', 
+      model: 'game', 
+      key: 'id',
+    }
+    },
+  // New field for associating the comment with a user
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'user', 
       key: 'id',
     },
   },

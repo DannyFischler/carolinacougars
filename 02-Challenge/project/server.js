@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const sequelize = require('./config/connection'); 
 
 const app = express();
+app.use(express.static('public'));
 const PORT = process.env.PORT || 3001;
 
 // Importing routes
@@ -16,7 +19,8 @@ app.use('/api/games', gameRoutes);
 app.use('/api/comments', commentRoutes);
 
 
-sequelize.sync({ alter: true }).then(() => {
+
+sequelize.sync({ force: false }).then(() => {
   console.log('Database synced with models!');
   app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 });
