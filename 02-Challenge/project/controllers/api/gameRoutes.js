@@ -31,7 +31,7 @@ router.get('/search/:gameName', async (req, res) => {
     const attributes = {
       overview: gameDetails.description || "",
       releaseDate: gameDetails.released,
-      developers: gameDetails.developers?.map(dev => dev.nameQ) || [],
+      developers: gameDetails.developers?.map(dev => dev.name) || [],
       platforms: gameDetails.platforms?.map(p => p.platform.name) || [],
       genres: gameDetails.genres?.map(genre => genre.name) || [],
       // Include additional attributes you're interested in
