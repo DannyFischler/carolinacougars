@@ -3,6 +3,16 @@ const router = require('express').Router();
 const { Game, Comment, User } = require('../../models'); // Include the User model
 
 // Route to get game details by game name
+router.get('/', async (req, res) => {  
+  try{
+      //rendering the login screen and status when they are logged in
+      res.render('game');
+  }
+  catch (err) {
+      res.status(500).json(err);
+  }
+})
+
 router.get('/search/:gameName', async (req, res) => {
   const gameName = req.params.gameName.replace(/-/g, ' ');
 
@@ -46,8 +56,8 @@ router.get('/search/:gameName', async (req, res) => {
         { model: User, attributes: ['user_name'] } // Assuming 'user_name' is the field you want from the User model
       ],
     });
-
-    res.json({ gameDetails, attributes, comments });
+    res.render('game', { gameDetails, attributes, comments });
+    // res.json({ gameDetails, attributes, comments });
   } catch (error) {
     console.error('Error fetching game data:', error);
     res.status(500).json({ message: 'Error fetching data', error });

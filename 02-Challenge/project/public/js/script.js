@@ -29,8 +29,8 @@ function searchAndDisplayGame(searchQuery) {
       attributes = Object.keys(data.attributes)
       displayGameInfo(data.gameDetails);
       displayAttributes(data.attributes);
-      // document.getElementById("gameSlug").value = data.gameDetails2.id; // Assuming the game ID is returned here
-      // selectAttribute("overview"); // Automatically select the "Overview" upon search
+      // document.getElementById("gameSlug").value = data.gameDetails2.id; // 
+      // selectAttribute("overview"); // 
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -54,9 +54,9 @@ function loadGameDetails(gameId) {
 function displayGameInfo(gameDetails) {
   console.log("displayGameInfo", gameDetails);
   const gameInfoDiv = document.getElementById("game-info");
-  gameInfoDiv.innerHTML = `<h2>${gameDetails.name}</h2>`; // Add more details as needed
+  gameInfoDiv.innerHTML = `<h2>${gameDetails.name}</h2>`; 
   const gamePic = document.getElementById("game-pic");
-  gamePic.setAttribute("src", gameDetails.background_image); // Add more details as needed
+  gamePic.setAttribute("src", gameDetails.background_image); 
   gamePic.style.visibility = "visible";
 }
 
