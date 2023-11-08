@@ -18,9 +18,18 @@ router.get('/search/:gameName', async (req, res) => {
       return res.status(404).json({ message: 'Game not found' });
     }
     
-    const gameDetails = rawgResponse.data.results[0];
+    const gameInfo = rawgResponse.data.results[0];
+
+    const gameidResponse = await axios.get(`https://api.rawg.io/api/games/${gameInfo.id}?key=${process.env.RAWG_KEY}`);
+
+    if (!Object.keys(gameidResponse.data).length) {
+      return res.status(404).json({ message: 'Game still not found' });
+    }
+
+    const gameDetails = gameidResponse.data;
 
     const attributes = {
+      overview: gameDetails.description || "",
       releaseDate: gameDetails.released,
       developers: gameDetails.developers?.map(dev => dev.name) || [],
       platforms: gameDetails.platforms?.map(p => p.platform.name) || [],
