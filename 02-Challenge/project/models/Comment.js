@@ -17,33 +17,19 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-          model: 'User',
-          key: 'id'
-      }
-  },
-    
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: DataTypes.NOW,
-  },
     // Game slug from RAWG API to link comments to specific game
     game_slug: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
-  {
-    sequelize,
-    timestamps: true, // to have Sequelize handle created_at and updated_at fields
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'comment', // this defines the name of the table in the database
-  }
-);
+
+{
+  sequelize,
+  timestamps: true,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'comment',
+});
 
 module.exports = Comment;
