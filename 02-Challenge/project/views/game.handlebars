@@ -1,0 +1,69 @@
+<!-- Create Modal (Hidden) -->
+
+<div class="text-center bg-secondary p-3 mb-5">
+  <div class="row text-center fs-5 mt-2 text-black">
+    <p data-user-id={{user_id}}>Hello
+      {{user_name}}! Join in on The Carolina Cougars Gamer Talks!!!</p>
+  </div>
+  <div class="row mt-5">
+    <div class="card px-0 shadow">
+      <h5 class="card-header bg-dark text-white">Search For a Game</h5>
+      <div class="card-body">
+        <form>
+          <div class="row mb-3">
+            <label for="inputGame3" class="col-sm-20 col-form-label">Game Name</label>
+            <div class="col-sm-10">
+              <input id="inputGame" type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="text-center">
+            <button
+              id="search-button"
+              type="submit"
+              class="btn btn-warning"
+            >Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Body -->
+<div class="container">
+
+  {{#if gameDetails}}
+    {{#each attributes as |attribute|}}
+      <div class="fw-bold fst-italic"> {{@key}}
+        <span class="text-warning fw-light" {{attribute}}> {{attribute}} </span>
+      </div>
+    {{/each}}
+      <div class="row mt-5">
+    <div class="card px-0 shadow">
+      <h5 class="card-header bg-dark text-white">Leave a Comment</h5>
+      <div class="card-body">
+        <form>
+          <div class="row mb-3">
+            <label for="inputComment3" class="col-sm-20 col-form-label">Comment</label>
+            <div class="col-sm-10">
+              <input id="inputComment" type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="text-center">
+            <button
+              id="comment-button"
+              type="submit"
+              class="btn btn-warning"
+            >Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/game.js"></script>
