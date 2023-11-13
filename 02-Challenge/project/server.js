@@ -20,14 +20,15 @@ const app = express();
 // Session object configuration
 const sess = {
   secret: process.env.SECRET,
-  cookie: {
-    expires: new Date(Date.now() + (15 * 60000))
-  },
+  cookie: {},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
     db: sequelize
   }),
+          //setting session to expire after 4 min
+          expires: new Date(Date.now() + (4*60000))
+
 };
 
 app.use(session(sess)); // Use the session middleware
